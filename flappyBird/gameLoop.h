@@ -15,9 +15,9 @@ private:
 	SDL_Event event;
 	SDL_Window* window;
 	SDL_Renderer* renderer;
-	SDL_Rect srcRect, dstRect;
 	bird bird;
 	background background;
+	SDL_Rect srcRect, dstRect;
 public:
 	bool getGameState() { return gameState; }
 	void update();

@@ -1,5 +1,4 @@
-﻿  background.cpp
-  gameLoop.cpp
-  main.cpp
-  Generating Code...
+﻿  bird.cpp
+C:\Users\Fptsh\source\repos\flappyBird\bird.cpp(11,14): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fptsh\source\repos\flappyBird\bird.cpp(21,14): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   flappyBird.vcxproj -> C:\Users\Fptsh\source\repos\flappyBird\x64\Debug\flappyBird.exe

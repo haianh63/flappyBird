@@ -4,7 +4,6 @@ Object::Object()
 {
 	text = nullptr;
 }
-
 void Object::setSrc(int x, int y, int w, int h)
 {
 	srcRect.x = x;

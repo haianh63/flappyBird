@@ -14,6 +14,6 @@ public:
 	void setSrc(int x,int y,int w,int h);
 	void setDst(int x, int y, int w, int h);
 	void createTexture(const char* filepath, SDL_Renderer* renderer);
-	void virtual render(SDL_Renderer* ren, SDL_Texture* tex, SDL_Rect srcRect, SDL_Rect dstRect) {}
+	void virtual render(SDL_Renderer* ren) {}
 };
 

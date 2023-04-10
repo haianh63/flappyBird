@@ -2,7 +2,7 @@
 
 void gameLoop::update()
 {
-	
+	bird.update();
 }
 
 gameLoop::gameLoop()
@@ -27,6 +27,8 @@ void gameLoop::Initialise()
 			cout << "Initialisation is  successful!" << endl;
 			gameState = true;
 			bird.createTexture("asset/midBird.png", renderer);
+			bird.createTexture2("asset/upBird.png", renderer);
+			bird.createTexture3("asset/downBird.png", renderer);
 			background.createTexture("asset/Background.png", renderer);
 		}
 	}
@@ -34,17 +36,33 @@ void gameLoop::Initialise()
 
 void gameLoop::Event()
 {
+	bird.getJumpTime();
 	SDL_PollEvent(&event);
 	if (event.type == SDL_QUIT) gameState = false;
-	if (event.type == SDL_MOUSEBUTTONDOWN) cout << "Pressed!"<<endl;
-	if (event.type == SDL_MOUSEMOTION) cout << event.motion.x << " " << event.motion.y << endl;
+	/*if (event.type == SDL_KEYDOWN) {
+		if (event.key.keysym.scancode == SDL_SCANCODE_UP) {
+			if (!bird.jumpState()) {
+				bird.jump();
+			}
+			else bird.fall();
+		}
+	}*/
+	if (event.type == SDL_MOUSEBUTTONDOWN) {
+		if (!bird.jumpState()) {
+			bird.jump();
+		}
+		else bird.fall();
+	}
+	else bird.fall();
+	//if (event.type == SDL_MOUSEBUTTONDOWN) cout << "Pressed!"<<endl;
+	//if (event.type == SDL_MOUSEMOTION) cout << event.motion.x << " " << event.motion.y << endl;
 }
 
 void gameLoop::render()
 {
 	SDL_RenderClear(renderer);
-	background.render(renderer, background.getTexture());
-	bird.render(renderer, bird.getTexture(), bird.getSrc(), bird.getDst());
+	background.render(renderer);
+	bird.render(renderer);
 	SDL_RenderPresent(renderer);
 }
 
