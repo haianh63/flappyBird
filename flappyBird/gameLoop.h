@@ -5,6 +5,7 @@
 #include "textureManager.h"
 #include "bird.h"
 #include "background.h"
+#include "base.h"
 using namespace std;
 class gameLoop
 {
@@ -17,6 +18,7 @@ private:
 	SDL_Renderer* renderer;
 	bird bird;
 	background background;
+	base base;
 	SDL_Rect srcRect, dstRect;
 public:
 	bool getGameState() { return gameState; }

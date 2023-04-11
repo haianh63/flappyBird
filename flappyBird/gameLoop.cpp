@@ -12,6 +12,8 @@ gameLoop::gameLoop()
 	gameState = false;
 	bird.setSrc(0, 0, 34, 24);
 	bird.setDst(10, 10, 34, 24);
+	base.setSrc(0,0 , 400, 32);
+	base.setDst(0, 576, 800, 64);
 }
 
 void gameLoop::Initialise()
@@ -30,6 +32,7 @@ void gameLoop::Initialise()
 			bird.createTexture2("asset/upBird.png", renderer);
 			bird.createTexture3("asset/downBird.png", renderer);
 			background.createTexture("asset/Background.png", renderer);
+			base.createTexture("asset/base.png", renderer);
 		}
 	}
 }
@@ -63,6 +66,7 @@ void gameLoop::render()
 	SDL_RenderClear(renderer);
 	background.render(renderer);
 	bird.render(renderer);
+	base.render(renderer);
 	SDL_RenderPresent(renderer);
 }
 
