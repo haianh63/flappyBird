@@ -11,9 +11,13 @@ gameLoop::gameLoop()
 	renderer = nullptr;
 	gameState = false;
 	bird.setSrc(0, 0, 34, 24);
-	bird.setDst(10, 10, 34, 24);
-	base.setSrc(0,0 , 400, 32);
-	base.setDst(0, 576, 800, 64);
+	bird.setDst(10, 10, 47, 33);
+	base.setSrc(0,0 , 240, 32);
+	base.setDst(0, 576, 480, 64);
+	pipe[0].setDst(700, 0, 90, 576);
+	pipe[0].ranYPos();
+	pipe[1].setDst(700 + 195 + 90 , 0, 90, 576);
+	pipe[1].ranYPos();
 }
 
 void gameLoop::Initialise()
@@ -33,32 +37,20 @@ void gameLoop::Initialise()
 			bird.createTexture3("asset/downBird.png", renderer);
 			background.createTexture("asset/Background.png", renderer);
 			base.createTexture("asset/base.png", renderer);
+			pipe[0].createTexture("asset/pipe.png", renderer);
+			pipe[1].createTexture("asset/pipe.png", renderer);
 		}
 	}
 }
 
 void gameLoop::Event()
 {
-	bird.getJumpTime();
 	SDL_PollEvent(&event);
 	if (event.type == SDL_QUIT) gameState = false;
-	/*if (event.type == SDL_KEYDOWN) {
-		if (event.key.keysym.scancode == SDL_SCANCODE_UP) {
-			if (!bird.jumpState()) {
-				bird.jump();
-			}
-			else bird.fall();
-		}
-	}*/
 	if (event.type == SDL_MOUSEBUTTONDOWN) {
-		if (!bird.jumpState()) {
-			bird.jump();
-		}
-		else bird.fall();
+		bird.jump();
 	}
 	else bird.fall();
-	//if (event.type == SDL_MOUSEBUTTONDOWN) cout << "Pressed!"<<endl;
-	//if (event.type == SDL_MOUSEMOTION) cout << event.motion.x << " " << event.motion.y << endl;
 }
 
 void gameLoop::render()
@@ -66,6 +58,8 @@ void gameLoop::render()
 	SDL_RenderClear(renderer);
 	background.render(renderer);
 	bird.render(renderer);
+	pipe[0].render(renderer);
+	pipe[1].render(renderer);
 	base.render(renderer);
 	SDL_RenderPresent(renderer);
 }

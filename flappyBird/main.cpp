@@ -1,7 +1,7 @@
 #include "gameLoop.h"
 gameLoop* game = new gameLoop();
 int main(int argc, char** argv) {
-	double frameStart, frameTime, fps = 100.0;
+	double frameStart, frameTime, fps = 66.0;
 	double frameDelay = 1000 / fps;
 	game->Initialise();
 	while (game -> getGameState()) {

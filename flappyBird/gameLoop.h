@@ -6,12 +6,13 @@
 #include "bird.h"
 #include "background.h"
 #include "base.h"
+#include "pipe.h"
 using namespace std;
 class gameLoop
 {
 private:
 	const int HEIGHT = 640;
-	const int WIDTH = 800;
+	const int WIDTH = 480;
 	bool gameState;
 	SDL_Event event;
 	SDL_Window* window;
@@ -20,6 +21,7 @@ private:
 	background background;
 	base base;
 	SDL_Rect srcRect, dstRect;
+	pipe pipe[2];
 public:
 	bool getGameState() { return gameState; }
 	void update();
