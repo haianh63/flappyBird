@@ -6,9 +6,20 @@ void bird::fall()
 	velocity += 0.3;
 	yPos = yPos + velocity;
 	if (yPos + 33 > 576) yPos = 543;
-	setDst(10, yPos, 47, 33);
+	setDst(200, yPos, 47, 33);
 	if (velocity > 0) {
 		isJumping = false;
+	}
+	if (isJumping == true) {
+		time = 0;
+		angle = -25;
+	}
+	else if (isJumping == false) {
+		time++;
+		if (time >=20) {
+			angle += 5;
+			if (angle >= 90) angle = 90;
+		}
 	}
 }
 

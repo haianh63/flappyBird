@@ -13,6 +13,7 @@ private:
 	SDL_Texture* text3;
 	SDL_Rect src, dst;
 	double angle = 0;
+	double time = 0;
 public:
 	bool jumpState () { return isJumping; }
 	void setAngle(double angle) { this->angle = angle; }

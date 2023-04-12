@@ -11,7 +11,7 @@ gameLoop::gameLoop()
 	renderer = nullptr;
 	gameState = false;
 	bird.setSrc(0, 0, 34, 24);
-	bird.setDst(10, 10, 47, 33);
+	bird.setDst(200, 296, 47, 33);
 	base.setSrc(0,0 , 240, 32);
 	base.setDst(0, 576, 480, 64);
 	pipe[0].setDst(700, 0, 90, 576);
