@@ -49,3 +49,11 @@ void bird::createTexture3(const char* filepath, SDL_Renderer* renderer)
 {
 	text3 = textureManager::loadTexture(filepath, renderer);
 }
+
+bool bird::checkCollision(SDL_Rect rect)
+{
+	if (dst.y > rect.y+ rect.h || dst.y + dst.h < rect.y || dst.x > rect.x +rect.w || dst.x + dst.w < rect.x) {
+		return false;
+	}
+	return true;
+}

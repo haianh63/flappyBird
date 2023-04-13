@@ -10,3 +10,6 @@ void base::render(SDL_Renderer* ren)
 		setSrc(src.x -800, 0, 240, 32);
 	}
 }
+void base::renderDie(SDL_Renderer* ren) {
+	SDL_RenderCopy(ren, getTexture(), &src, &dst);
+}

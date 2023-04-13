@@ -47,7 +47,7 @@ void gameLoop::Event()
 {
 	SDL_PollEvent(&event);
 	if (event.type == SDL_QUIT) gameState = false;
-	if (event.type == SDL_MOUSEBUTTONDOWN) {
+	if (bird.getDie() == false && event.type == SDL_MOUSEBUTTONDOWN) {
 		bird.jump();
 	}
 	else bird.fall();
@@ -55,13 +55,33 @@ void gameLoop::Event()
 
 void gameLoop::render()
 {
-	SDL_RenderClear(renderer);
-	background.render(renderer);
-	bird.render(renderer);
-	pipe[0].render(renderer);
-	pipe[1].render(renderer);
-	base.render(renderer);
-	SDL_RenderPresent(renderer);
+	if (bird.getDie() == false) {
+		SDL_RenderClear(renderer);
+		background.render(renderer);
+		bird.render(renderer);
+		pipe[0].render(renderer);
+		pipe[1].render(renderer);
+		base.render(renderer);
+		SDL_RenderPresent(renderer);
+	}
+	else if (bird.getDie() == true && bird.getYPos() <= 542.99) {
+		if (bird.getVel() < 0) {
+			bird.setVel(0);
+			bird.setJumpState(false);
+		}
+		SDL_RenderClear(renderer);
+		background.render(renderer);
+		pipe[0].renderDie(renderer);
+		pipe[1].renderDie(renderer);
+		bird.render(renderer);
+		base.renderDie(renderer);
+		SDL_RenderPresent(renderer);
+	}
+	cout << bird.getYPos() << endl;
+	if (bird.checkCollision(pipe[0].getBox1()) || bird.checkCollision(pipe[0].getBox2())
+	 || bird.checkCollision(pipe[1].getBox1()) || bird.checkCollision(pipe[1].getBox2())) {
+		bird.setDie(true);
+	}
 }
 
 void gameLoop::clear()
