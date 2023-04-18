@@ -2,6 +2,7 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <fstream>
 #include "textureManager.h"
 #include "bird.h"
 #include "background.h"
@@ -10,6 +11,7 @@
 #include "textBox.h"
 #include "sound.h"
 #include "gameOver.h"
+#include "button.h"
 using namespace std;
 class gameLoop
 {
@@ -31,10 +33,16 @@ private:
 	bool increaseScore2 = true;
 	sound dieSound, hitSound, pointSound, wingSound, swooshSound;
 	bool isHitSound, isDieSound;
-	gameOver gameOver;
+	gameOver gameOver,newGameOver;
 	textBox dieScore;
 	int bestScore = 100;
-	int x, y;
+	ifstream read;
+	fstream write;
+	bool isNewRecord = false;
+	button replay;
+	bool isReplay = false;
+	bool isQuit = false;
+	int xPos, yPos;
 public:
 	bool getGameState() { return gameState; }
 	void update();
@@ -43,5 +51,7 @@ public:
 	void Event();
 	void render();
 	void clear();
+	bool getQuit() { return isQuit; }
+	bool getReplay() { return isReplay; }
 };
 

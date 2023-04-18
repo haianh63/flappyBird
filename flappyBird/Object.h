@@ -15,5 +15,6 @@ public:
 	void setDst(int x, int y, int w, int h);
 	void createTexture(const char* filepath, SDL_Renderer* renderer);
 	void virtual render(SDL_Renderer* ren) {}
+	~Object();
 };
 

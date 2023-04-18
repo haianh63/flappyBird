@@ -49,7 +49,14 @@ void gameLoop::Initialise()
 			pointSound.loadSound("asset/point.wav");
 			swooshSound.loadSound("asset/swoosh.wav");
 			gameOver.createTexture("asset/gameOver.png", renderer);
+			newGameOver.createTexture("asset/newGameOver.png", renderer);
 			dieScore.loadFont("asset/font.ttf", 40);
+			read.open("asset/bestScore.txt");
+			isNewRecord = false;
+			replay.createTexture("asset/replay.png", renderer);
+			replay.setWidthHeight(130, 72);
+			isReplay = false;
+			isQuit = false;
 		}
 
 	}
@@ -58,12 +65,19 @@ void gameLoop::Initialise()
 void gameLoop::Event()
 {
 	SDL_PollEvent(&event);
-	if (event.type == SDL_QUIT) gameState = false;
+	if (event.type == SDL_QUIT) {
+		gameState = false;
+		isQuit = true;
+	}
 	if (bird.getDie() == false && event.type == SDL_MOUSEBUTTONDOWN) {
 		wingSound.playSound();
 		bird.jump();
 	}
 	else bird.fall();
+	if (event.type == SDL_MOUSEBUTTONDOWN && bird.getDie() == true && bird.getYPos() > 542.99) {
+		SDL_GetMouseState(&xPos, &yPos);
+		if (175 <= xPos && xPos <= 305 && 454 <= yPos && yPos <= 526) isReplay = true;
+	}
 }
 
 void gameLoop::render()
@@ -99,6 +113,13 @@ void gameLoop::render()
 			SDL_RenderPresent(renderer);
 		}
 		else {
+			read >> bestScore;
+			if (score > bestScore) {
+				write.open("asset/bestScore.txt", ios::trunc | ios::out);
+				write << score;
+				bestScore = score;
+				isNewRecord = true;
+			}
 			dieScore.setText(to_string(score), renderer);
 			SDL_RenderClear(renderer);
 			background.render(renderer);
@@ -106,7 +127,13 @@ void gameLoop::render()
 			pipe[1].renderDie(renderer);
 			bird.renderDie(renderer);
 			base.renderDie(renderer);
-			gameOver.render(renderer);
+			if (isNewRecord) {
+				newGameOver.render(renderer);
+			}
+			else {
+				gameOver.render(renderer);
+			}
+			replay.render(renderer, 240, 490);
 			dieScore.draw(renderer, 362, 316);
 			dieScore.setText(to_string(bestScore), renderer);
 			dieScore.draw(renderer, 362, 386);
@@ -133,4 +160,6 @@ void gameLoop::clear()
 	renderer = nullptr;
 	SDL_DestroyWindow(window);
 	window = nullptr;
+	read.close();
+	write.close();
 }

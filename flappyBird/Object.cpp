@@ -24,3 +24,6 @@ void Object::createTexture(const char* filepath, SDL_Renderer* renderer)
 {
 	text = textureManager::loadTexture(filepath, renderer);
 }
+Object::~Object() {
+	SDL_DestroyTexture(text);
+}
