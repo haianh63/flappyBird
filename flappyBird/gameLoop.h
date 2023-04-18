@@ -9,6 +9,7 @@
 #include "pipe.h"
 #include "textBox.h"
 #include "sound.h"
+#include "gameOver.h"
 using namespace std;
 class gameLoop
 {
@@ -30,6 +31,10 @@ private:
 	bool increaseScore2 = true;
 	sound dieSound, hitSound, pointSound, wingSound, swooshSound;
 	bool isHitSound, isDieSound;
+	gameOver gameOver;
+	textBox dieScore;
+	int bestScore = 100;
+	int x, y;
 public:
 	bool getGameState() { return gameState; }
 	void update();

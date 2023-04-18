@@ -15,8 +15,8 @@ private:
 public:
 	void loadFont(string filepath, int size);
 	void setText(string text, SDL_Renderer* ren);
-	void draw(SDL_Renderer* ren);
 	void setColor(int r, int g, int b, int a);
 	~textBox();
+	void draw(SDL_Renderer* ren, int x, int y);
 };
 

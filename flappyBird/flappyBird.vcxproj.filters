@@ -45,6 +45,9 @@
     <ClCompile Include="sound.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="gameOver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameLoop.h">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameOver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

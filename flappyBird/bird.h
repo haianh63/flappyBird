@@ -31,5 +31,6 @@ public:
 	bool checkCollision(SDL_Rect rect);
 	void setDie(bool a) { isDie = a; }
 	bool getDie() { return isDie; }
+	void renderDie(SDL_Renderer* ren);
 };
 

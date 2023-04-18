@@ -57,3 +57,7 @@ bool bird::checkCollision(SDL_Rect rect)
 	}
 	return true;
 }
+void bird::renderDie(SDL_Renderer* ren) {
+	src = getSrc(), dst = getDst();
+	SDL_RenderCopyEx(ren, getTexture(), &src, &dst, angle, nullptr, SDL_FLIP_NONE);
+}

@@ -48,6 +48,8 @@ void gameLoop::Initialise()
 			wingSound.loadSound("asset/wing.wav");
 			pointSound.loadSound("asset/point.wav");
 			swooshSound.loadSound("asset/swoosh.wav");
+			gameOver.createTexture("asset/gameOver.png", renderer);
+			dieScore.loadFont("asset/font.ttf", 40);
 		}
 
 	}
@@ -78,22 +80,38 @@ void gameLoop::render()
 		pipe[0].render(renderer);
 		pipe[1].render(renderer);
 		base.render(renderer);
-		scoreBox.draw(renderer);
+		scoreBox.draw(renderer,250,110);
 		SDL_RenderPresent(renderer);
 	}
-	else if (bird.getDie() == true && bird.getYPos() <= 542.99) {
-		if (bird.getVel() < 0) {
-			bird.setVel(0);
-			bird.setJumpState(false);
+	else if (bird.getDie() == true) {
+		if (bird.getYPos() <= 542.99) {
+			if (bird.getVel() < 0) {
+				bird.setVel(0);
+				bird.setJumpState(false);
+			}
+			SDL_RenderClear(renderer);
+			background.render(renderer);
+			pipe[0].renderDie(renderer);
+			pipe[1].renderDie(renderer);
+			bird.render(renderer);
+			base.renderDie(renderer);
+			scoreBox.draw(renderer,250,110);
+			SDL_RenderPresent(renderer);
 		}
-		SDL_RenderClear(renderer);
-		background.render(renderer);
-		pipe[0].renderDie(renderer);
-		pipe[1].renderDie(renderer);
-		bird.render(renderer);
-		base.renderDie(renderer);
-		scoreBox.draw(renderer);
-		SDL_RenderPresent(renderer);
+		else {
+			dieScore.setText(to_string(score), renderer);
+			SDL_RenderClear(renderer);
+			background.render(renderer);
+			pipe[0].renderDie(renderer);
+			pipe[1].renderDie(renderer);
+			bird.renderDie(renderer);
+			base.renderDie(renderer);
+			gameOver.render(renderer);
+			dieScore.draw(renderer, 362, 316);
+			dieScore.setText(to_string(bestScore), renderer);
+			dieScore.draw(renderer, 362, 386);
+			SDL_RenderPresent(renderer);
+		}
 	}
 	if (bird.checkCollision(pipe[0].getBox1()) || bird.checkCollision(pipe[0].getBox2())
 	 || bird.checkCollision(pipe[1].getBox1()) || bird.checkCollision(pipe[1].getBox2())) {

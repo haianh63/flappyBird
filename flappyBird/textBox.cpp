@@ -21,11 +21,6 @@ void textBox::setText(string text, SDL_Renderer *ren)
 	}
 }
 
-void textBox::draw(SDL_Renderer* ren)
-{
-	SDL_RenderCopy(ren, textTexture, nullptr, &textRect);
-}
-
 void textBox::setColor(int r, int g, int b, int a)
 {
 	color.r = r;
@@ -40,4 +35,10 @@ textBox::~textBox()
 		SDL_DestroyTexture(textTexture);
 	}
 	TTF_CloseFont(font);
+}
+void textBox::draw(SDL_Renderer* ren, int x, int y)
+{
+	textRect.x = x- textRect.w/2;
+	textRect.y = y - textRect.h/2;
+	SDL_RenderCopy(ren, textTexture, nullptr, &textRect);
 }
