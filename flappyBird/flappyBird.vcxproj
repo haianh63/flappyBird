@@ -139,6 +139,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="pipe.cpp" />
+    <ClCompile Include="sound.cpp" />
+    <ClCompile Include="textBox.cpp" />
     <ClCompile Include="textureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +150,8 @@
     <ClInclude Include="gameLoop.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="pipe.h" />
+    <ClInclude Include="sound.h" />
+    <ClInclude Include="textBox.h" />
     <ClInclude Include="textureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

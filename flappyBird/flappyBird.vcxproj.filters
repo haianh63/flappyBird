@@ -39,6 +39,12 @@
     <ClCompile Include="pipe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="textBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sound.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameLoop.h">
@@ -60,6 +66,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pipe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="textBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sound.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
