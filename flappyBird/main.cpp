@@ -8,9 +8,13 @@ int main(int argc, char** argv) {
 		while (game->getGameState()) {
 			frameStart = SDL_GetTicks();
 			game->Event();
-			game->update();
-			game->render();
-			if (game->getReplay()) break;
+			if (game->getIntro()) game->intro();
+			else {
+				game->update();
+				game->render();
+				if (game->getReplay()) break;
+			}
+			
 			frameTime = SDL_GetTicks() - frameStart;
 			if (frameTime < frameDelay) SDL_Delay(frameDelay - frameTime);
 		}
@@ -20,6 +24,5 @@ int main(int argc, char** argv) {
 			game = new gameLoop();
 		}
 	}
-
 	return 0;
 }

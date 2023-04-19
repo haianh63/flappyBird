@@ -4,7 +4,7 @@
 class bird:public Object
 {
 private:
-	double yPos = 200;
+	double yPos = 296;
 	double gravity = 0.3;
 	bool isJumping = false;
 	double velocity = 0;

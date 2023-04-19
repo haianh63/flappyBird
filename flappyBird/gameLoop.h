@@ -43,6 +43,8 @@ private:
 	bool isReplay = false;
 	bool isQuit = false;
 	int xPos, yPos;
+	button message;
+	bool isIntro = true;
 public:
 	bool getGameState() { return gameState; }
 	void update();
@@ -53,5 +55,7 @@ public:
 	void clear();
 	bool getQuit() { return isQuit; }
 	bool getReplay() { return isReplay; }
+	void intro();
+	bool getIntro() { return isIntro; }
 };
 

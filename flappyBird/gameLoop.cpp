@@ -57,6 +57,9 @@ void gameLoop::Initialise()
 			replay.setWidthHeight(130, 72);
 			isReplay = false;
 			isQuit = false;
+			message.createTexture("asset/message.png", renderer);
+			message.setWidthHeight(276, 400);
+			isIntro = true;
 		}
 
 	}
@@ -69,14 +72,24 @@ void gameLoop::Event()
 		gameState = false;
 		isQuit = true;
 	}
-	if (bird.getDie() == false && event.type == SDL_MOUSEBUTTONDOWN) {
-		wingSound.playSound();
-		bird.jump();
+	if (isIntro == true) {
+		if (event.type == SDL_MOUSEBUTTONDOWN) {
+			cout << "clicked!" << endl;
+			isIntro = false;
+			wingSound.playSound();
+			bird.jump();
+		}
 	}
-	else bird.fall();
-	if (event.type == SDL_MOUSEBUTTONDOWN && bird.getDie() == true && bird.getYPos() > 542.99) {
-		SDL_GetMouseState(&xPos, &yPos);
-		if (175 <= xPos && xPos <= 305 && 454 <= yPos && yPos <= 526) isReplay = true;
+	else {
+		if (bird.getDie() == false && event.type == SDL_MOUSEBUTTONDOWN) {
+			wingSound.playSound();
+			bird.jump();
+		}
+		else bird.fall();
+		if (event.type == SDL_MOUSEBUTTONDOWN && bird.getDie() == true && bird.getYPos() > 542.99) {
+			SDL_GetMouseState(&xPos, &yPos);
+			if (175 <= xPos && xPos <= 305 && 454 <= yPos && yPos <= 526) isReplay = true;
+		}
 	}
 }
 
@@ -162,4 +175,11 @@ void gameLoop::clear()
 	window = nullptr;
 	read.close();
 	write.close();
+}
+void gameLoop::intro() {
+	background.render(renderer);
+	bird.renderDie(renderer);
+	base.renderIntro(renderer);
+	message.render(renderer, 240, 290);
+	SDL_RenderPresent(renderer);
 }

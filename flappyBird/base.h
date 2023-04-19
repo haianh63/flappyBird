@@ -7,5 +7,6 @@ private:
 public:
 	void render(SDL_Renderer* ren);
 	void renderDie(SDL_Renderer* ren);
+	void renderIntro(SDL_Renderer* ren);
 };
 
