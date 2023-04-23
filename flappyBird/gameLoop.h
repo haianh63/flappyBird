@@ -12,6 +12,7 @@
 #include "sound.h"
 #include "gameOver.h"
 #include "button.h"
+#include "medal.h"
 using namespace std;
 class gameLoop
 {
@@ -45,6 +46,7 @@ private:
 	int xPos, yPos;
 	button message;
 	bool isIntro = true;
+	medal medal;
 public:
 	bool getGameState() { return gameState; }
 	void update();

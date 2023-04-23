@@ -139,6 +139,7 @@
     <ClCompile Include="gameLoop.cpp" />
     <ClCompile Include="gameOver.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="medal.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="pipe.cpp" />
     <ClCompile Include="sound.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="button.h" />
     <ClInclude Include="gameLoop.h" />
     <ClInclude Include="gameOver.h" />
+    <ClInclude Include="medal.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="pipe.h" />
     <ClInclude Include="sound.h" />

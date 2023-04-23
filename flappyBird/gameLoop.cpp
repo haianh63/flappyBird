@@ -150,6 +150,26 @@ void gameLoop::render()
 			dieScore.draw(renderer, 362, 316);
 			dieScore.setText(to_string(bestScore), renderer);
 			dieScore.draw(renderer, 362, 386);
+			if (0 <= score && score <= 9) {
+				medal.createTexture("asset/noMedal.png", renderer);
+				medal.render(renderer, 100, 300);
+			}
+			else if (10 <= score && score <= 19) {
+				medal.createTexture("asset/bronze.png", renderer);
+				medal.render(renderer, 100, 300);
+			}
+			else if (20<=score && score <=49) {
+				medal.createTexture("asset/silver.png", renderer);
+				medal.render(renderer, 199, 200);
+			}
+			else if (50<=score && score <= 99) {
+				medal.createTexture("asset/platinum.png", renderer);
+				medal.render(renderer, 199, 200);
+			}
+			else if (score >= 100) {
+				medal.createTexture("asset/gold.png", renderer);
+				medal.render(renderer, 199, 200);
+			}
 			SDL_RenderPresent(renderer);
 		}
 	}
@@ -163,6 +183,13 @@ void gameLoop::render()
 		if (isDieSound) {
 			dieSound.playSound();
 			isDieSound = false;
+		}
+	}
+	if (bird.checkCollision(base.getDst())) {
+		bird.setDie(true);
+		if (isHitSound) {
+			hitSound.playSound();
+			isHitSound = false;
 		}
 	}
 }
