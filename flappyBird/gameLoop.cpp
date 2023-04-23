@@ -38,7 +38,11 @@ void gameLoop::Initialise()
 			bird.createTexture("asset/midBird.png", renderer);
 			bird.createTexture2("asset/upBird.png", renderer);
 			bird.createTexture3("asset/downBird.png", renderer);
-			background.createTexture("asset/Background.png", renderer);
+			background[0].createTexture("asset/Background.png", renderer);
+			background[1].createTexture("asset/Background1.png", renderer);
+			background[2].createTexture("asset/Background2.png", renderer);
+			background[3].createTexture("asset/Background3.png", renderer);
+			background[4].createTexture("asset/Background4.png", renderer);
 			base.createTexture("asset/base.png", renderer);
 			pipe[0].createTexture("asset/pipe.png", renderer);
 			pipe[1].createTexture("asset/pipe.png", renderer);
@@ -102,7 +106,7 @@ void gameLoop::render()
 		}
 		scoreBox.setText(to_string(score), renderer);
 		SDL_RenderClear(renderer);
-		background.render(renderer);
+		background[(score/10)%5].render(renderer);
 		bird.render(renderer);
 		pipe[0].render(renderer);
 		pipe[1].render(renderer);
@@ -117,7 +121,7 @@ void gameLoop::render()
 				bird.setJumpState(false);
 			}
 			SDL_RenderClear(renderer);
-			background.render(renderer);
+			background[(score / 10) % 5].render(renderer);
 			pipe[0].renderDie(renderer);
 			pipe[1].renderDie(renderer);
 			bird.render(renderer);
@@ -135,7 +139,7 @@ void gameLoop::render()
 			}
 			dieScore.setText(to_string(score), renderer);
 			SDL_RenderClear(renderer);
-			background.render(renderer);
+			background[(score / 10) % 5].render(renderer);
 			pipe[0].renderDie(renderer);
 			pipe[1].renderDie(renderer);
 			bird.renderDie(renderer);
@@ -160,15 +164,15 @@ void gameLoop::render()
 			}
 			else if (20<=score && score <=49) {
 				medal.createTexture("asset/silver.png", renderer);
-				medal.render(renderer, 199, 200);
+				medal.render(renderer, 100, 300);
 			}
 			else if (50<=score && score <= 99) {
 				medal.createTexture("asset/platinum.png", renderer);
-				medal.render(renderer, 199, 200);
+				medal.render(renderer, 100, 300);
 			}
 			else if (score >= 100) {
 				medal.createTexture("asset/gold.png", renderer);
-				medal.render(renderer, 199, 200);
+				medal.render(renderer, 100, 300);
 			}
 			SDL_RenderPresent(renderer);
 		}
@@ -204,7 +208,7 @@ void gameLoop::clear()
 	write.close();
 }
 void gameLoop::intro() {
-	background.render(renderer);
+	background[(score / 10) % 5].render(renderer);
 	bird.renderDie(renderer);
 	base.renderIntro(renderer);
 	message.render(renderer, 240, 290);

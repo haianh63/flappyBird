@@ -24,7 +24,7 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	bird bird;
-	background background;
+	background background[5];
 	base base;
 	SDL_Rect srcRect, dstRect;
 	pipe pipe[2];
