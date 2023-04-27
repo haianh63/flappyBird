@@ -47,6 +47,10 @@ private:
 	button message;
 	bool isIntro = true;
 	medal medal;
+	button pause;
+	button resume;
+	bool isPause = false;
+	bool falseAfterPause = false;
 public:
 	bool getGameState() { return gameState; }
 	void update();

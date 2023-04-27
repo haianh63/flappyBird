@@ -64,6 +64,12 @@ void gameLoop::Initialise()
 			message.createTexture("asset/message.png", renderer);
 			message.setWidthHeight(276, 400);
 			isIntro = true;
+			pause.createTexture("asset/pause.png", renderer);
+			pause.setWidthHeight(38, 42);
+			resume.createTexture("asset/resume.png", renderer);
+			resume.setWidthHeight(38, 42);
+			isPause = false;
+			falseAfterPause = false;
 		}
 
 	}
@@ -85,21 +91,41 @@ void gameLoop::Event()
 		}
 	}
 	else {
-		if (bird.getDie() == false && event.type == SDL_MOUSEBUTTONDOWN) {
-			wingSound.playSound();
-			bird.jump();
-		}
-		else bird.fall();
+		SDL_GetMouseState(&xPos, &yPos);
 		if (event.type == SDL_MOUSEBUTTONDOWN && bird.getDie() == true && bird.getYPos() > 542.99) {
-			SDL_GetMouseState(&xPos, &yPos);
 			if (175 <= xPos && xPos <= 305 && 454 <= yPos && yPos <= 526) isReplay = true;
+		}
+		if (event.type == SDL_MOUSEBUTTONDOWN && bird.getDie() == false && isPause == false) {
+			if (21 <= xPos && xPos <= 59 && 19 <= yPos && yPos <= 61) isPause = true;
+		}
+		else if (event.type == SDL_MOUSEBUTTONDOWN && bird.getDie() == false && isPause == true) {
+			if (21 <= xPos && xPos <= 59 && 19 <= yPos && yPos <= 61) {
+				isPause = false;
+				falseAfterPause = true;
+				bird.setVel(1);
+			}
+		}
+		if (isPause == false) {
+			if (falseAfterPause == true) {
+				bird.fall();
+				if (event.type == SDL_MOUSEBUTTONDOWN && (xPos <= 21 || xPos >= 59 || yPos <= 19 || yPos >= 61)) {
+					falseAfterPause = false;
+				}
+			}
+			else {
+				if (bird.getDie() == false && event.type == SDL_MOUSEBUTTONDOWN) {
+					wingSound.playSound();
+					bird.jump();
+				}
+				else bird.fall();
+			}
 		}
 	}
 }
 
 void gameLoop::render()
 {
-	if (bird.getDie() == false) {
+	if (bird.getDie() == false && isPause == false) {
 		if (pipe[0].getDst().x == 200 || pipe[1].getDst().x == 200) {
 			pointSound.playSound();
 			score++;
@@ -112,6 +138,19 @@ void gameLoop::render()
 		pipe[1].render(renderer);
 		base.render(renderer);
 		scoreBox.draw(renderer,250,110);
+		pause.render(renderer, 40, 40);
+		SDL_RenderPresent(renderer);
+	}
+	else if (bird.getDie() == false && isPause == true) {
+		dieScore.setText(to_string(score), renderer);
+		SDL_RenderClear(renderer);
+		background[(score / 10) % 5].render(renderer);
+		pipe[0].renderDie(renderer);
+		pipe[1].renderDie(renderer);
+		bird.renderDie(renderer);
+		base.renderDie(renderer);
+		scoreBox.draw(renderer, 250, 110);
+		resume.render(renderer, 40, 40);
 		SDL_RenderPresent(renderer);
 	}
 	else if (bird.getDie() == true) {

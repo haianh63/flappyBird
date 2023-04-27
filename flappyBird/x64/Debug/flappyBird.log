@@ -1,5 +1,2 @@
 ﻿  gameLoop.cpp
-  main.cpp
-C:\Users\Fptsh\source\repos\flappyBird\main.cpp(19,53): warning C4244: 'argument': conversion from 'double' to 'Uint32', possible loss of data
-  Generating Code...
   flappyBird.vcxproj -> C:\Users\Fptsh\source\repos\flappyBird\x64\Debug\flappyBird.exe
